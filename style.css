@@ -1,0 +1,84 @@
+/* La police est incluse dans le dossier du site. */
+@font-face {
+  font-family: Habitus;
+  src: url("fonts/Habitus-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 10px;
+  background: white;
+  color: black;
+  font-family: Habitus, Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+h1, p {
+  margin: 0;
+  font-size: inherit;
+  font-weight: normal;
+}
+
+nav {
+  text-align: right;
+}
+
+a {
+  color: rgb(35, 35, 35);
+  text-decoration: none;
+}
+.cours_lien{
+  color: blue;
+}
+.lettre {
+  transition: color 2s ease-out;
+}
+
+.lettre:hover {
+  color: var(--couleur-survol, inherit);
+  transition: none;
+}
+
+main {
+  margin: 10px 0 0px 15%;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+
+
+/* Sur un petit écran, les éléments se placent l'un sous l'autre. */
+@media (max-width: 700px) {
+  body {
+    margin: 20px;
+    font-size: 20px;
+  }
+
+  header {
+    display: block;
+  }
+
+  nav {
+    margin-top: 28px;
+    text-align: left;
+  }
+
+  main {
+    margin: 50px 0;
+  }
+}
