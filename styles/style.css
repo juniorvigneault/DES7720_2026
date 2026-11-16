@@ -1,0 +1,165 @@
+/* La police est incluse dans le dossier du site. */
+@font-face {
+  font-family: Habitus;
+  src: url("../fonts/Habitus-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 10px;
+  background: white;
+  color: black;
+  font-family: Habitus, Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+h1, p {
+  margin: 0;
+  font-size: inherit;
+  font-weight: normal;
+}
+
+nav {
+  text-align: right;
+}
+
+a {
+  color: rgb(35, 35, 35);
+  text-decoration: none;
+}
+.titre-accueil {
+  display: block;
+  width: fit-content;
+  color: inherit;
+}
+
+.cours_lien{
+  color: blue;
+}
+.lettre {
+  transition: color 2s ease-out;
+}
+
+.lettre:hover {
+  color: var(--couleur-survol, inherit);
+  transition: none;
+}
+
+main {
+  margin: 10px 0 0px 15%;
+}
+
+main > p, main > ul, main > section {
+  font-size: calc(1em - 2pt);
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+.contenu {
+  max-width: 55ch;
+  margin-bottom: 2em;
+}
+
+.contenu h2, .contenu h3 {
+  font-size: 1em;
+  margin: 0 0 0.3em;
+}
+
+.contenu section {
+  margin: 1.25em 0;
+}
+
+.contenu ul, .contenu ol {
+  margin-top: 0;
+}
+
+.contenu a {
+  color: blue;
+}
+
+.image-survol {
+  position: fixed;
+  margin: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.image-survol img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.copier-courriel {
+  font: inherit;
+  color: blue;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.courriel-en-ligne {
+  position: relative;
+  display: inline-block;
+}
+
+.courriel-en-ligne small {
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  white-space: nowrap;
+  background: white;
+}
+
+.image-survol figcaption, small[role="status"] {
+  font-size: 11px;
+  text-align: left;
+  color: rgb(153, 153, 153);
+}
+
+/* Le crédit reste dans le coin de la fenêtre pendant le survol. */
+.image-survol figcaption {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  max-width: calc(100% - 20px);
+  text-align: right;
+  background: white;
+}
+
+/* Sur un petit écran, les éléments se placent l'un sous l'autre. */
+@media (max-width: 700px) {
+  body {
+    margin: 20px;
+    font-size: 20px;
+  }
+
+  header {
+    display: block;
+  }
+
+  nav {
+    margin-top: 28px;
+    text-align: left;
+  }
+
+  main {
+    margin: 50px 0;
+  }
+}

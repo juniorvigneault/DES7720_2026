@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Le code comme matière — Cours 1</title>
+  <link rel="stylesheet" href="../styles/style.css">
+  <link rel="stylesheet" href="../styles/presentation.css">
+  <script src="../js/p5.min.js" defer></script>
+  <script src="../js/matter.min.js" defer></script>
+  <script src="../js/chaine-titre.js" defer></script>
+  <script src="../js/deroulement.js" defer></script>
+  <script src="../js/cinq-seances.js" defer></script>
+  <script src="../js/tissu-pause.js" defer></script>
+  <script src="../js/fin-atelier.js" defer></script>
+  <script src="../js/presentation-cours-1.js" defer></script>
+</head>
+<body>
+  <main>
+    <div id="canevas"><div id="exemple"></div></div>
+    <nav aria-label="Diapositives">
+      <button id="precedente" aria-label="Diapositive précédente" onclick="changerDiapo(-1)" disabled>←</button>
+      <button id="suivante" aria-label="Diapositive suivante" onclick="changerDiapo(1)">→</button>
+      <button type="button" aria-label="Réinitialiser la diapositive" title="Réinitialiser la diapositive" onclick="reinitialiserDiapo()">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 12.5a6.2 6.2 0 1 1-1.3-6.9l3 3M16.7 2.6v6h-6"/>
+        </svg>
+      </button>
+    </nav>
+  </main>
+
+  <template id="voxel-editor">
+    <section>
+      <h2>Voxel Editor</h2>
+      <p>Les mouvements des mains devant la caméra permettent de placer des cubes et de faire pivoter la construction.</p>
+      <video src="https://video.twimg.com/amplify_video/1987981412360691712/vid/avc1/1254x720/YB4Px0PEP_2Q8gnS.mp4" aria-label="Voxel Editor" autoplay muted loop playsinline controls></video>
+      <footer>Stereo Drift · <a href="https://x.com/measure_plan/status/1987981718805242262/video/1" target="_blank" rel="noopener">Voir la publication</a></footer>
+    </section>
+  </template>
+
+  <template id="typographie">
+    <section>
+      <h2>Swing Display</h2>
+      <p>Chaque lettre oscille comme un lustre lorsqu’on fait glisser l’un de ses cristaux avec la souris.</p>
+      <video src="https://cdn.prod.website-files.com/6539bb6a27e4890fa6ee0898%2F67ebbe4272bccf151609eb94_video-transcode.mp4" aria-label="Swing Display" autoplay muted loop playsinline controls></video>
+      <footer>Lea Naisberg · p5.js et Matter.js · <a href="https://swing-display.netlify.app/" target="_blank" rel="noopener">Essayer l’outil</a></footer>
+    </section>
+    <section>
+      <h2>Face Type — S</h2>
+      <p>La webcam capte les yeux et la bouche pour former un « S » qui reproduit leurs mouvements.</p>
+      <video src="https://cdn.prod.website-files.com/6539bb6a27e4890fa6ee0898/6539bb6a27e4890fa6ee0893_Face%20Type%20S-transcode.mp4" aria-label="Face Type — S" autoplay muted loop playsinline controls></video>
+      <footer>Lea Naisberg · p5.js et ml5.js · <a href="https://www.leanaisberg.com/face-type" target="_blank" rel="noopener">Voir le projet</a></footer>
+    </section>
+  </template>
+
+  <template id="shake-and-scroll">
+    <section>
+      <h2>Shake and Scroll</h2>
+      <p>Secouer le téléphone fait apparaître l’image suivante.</p>
+      <iframe src="https://player.vimeo.com/video/721389993?h=4bc1a32e54&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;playsinline=1" title="Shake and Scroll" allow="autoplay; fullscreen"></iframe>
+      <footer>Junyeol Baek · <a href="https://junyeol.kr/shake_scrolls.html" target="_blank" rel="noopener">Voir le projet</a></footer>
+    </section>
+  </template>
+
+  <template id="do-not-touch">
+    <section>
+      <h2>Do Not Touch</h2>
+      <p>Le clip donne des consignes à suivre avec la souris et superpose les mouvements du curseur à ceux des autres participants.</p>
+      <iframe src="https://iframe.mediadelivery.net/embed/689349/7e6d3e84-049a-477f-bb67-e3eb0d62ee95?autoplay=true&amp;muted=true&amp;loop=true" title="Do Not Touch" allow="autoplay; fullscreen"></iframe>
+      <footer>Moniker · « Kilo » de Light Light · <a href="https://donottouch.org/" target="_blank" rel="noopener">Ouvrir le site</a></footer>
+    </section>
+  </template>
+  <template id="mdm">
+    <section class="etude">
+      <h2>MDM · Garder la trace d’une décision</h2>
+      <div>
+        <p>Comment retrouver le moment où un projet a changé de direction ? La <i>Method for Design Materialization</i> (MDM) associe chaque version d’un prototype aux intentions et aux observations de la personne qui le crée.</p>
+        <p>Pendant le travail, un commit conserve la version que vous voulez pouvoir retrouver. À la fin de la séance, le journal permet de revenir sur plusieurs essais et de noter ce qui change dans votre intention.</p>
+        <p class="sources"><a href="https://materializing.design/mdm" target="_blank" rel="noopener">La méthode</a> · <a href="https://doi.org/10.1162/desi_a_00706" target="_blank" rel="noopener">Khaled et Barr, 2023</a></p>
+      </div>
+      <figure>
+        <img src="../assets/images/mdm-carnet-barr.jpg" alt="Détail du carnet de Barr avec un premier curseur dessiné à la main, des notes et des pistes surlignées.">
+        <figcaption><a href="https://pippinbarr.com/itisasifyouweremakinglove/process/journal.html#2018-03-24--in-which-a-bunch-of-early-design-notes-from-the-ipad" target="_blank" rel="noopener">Carnet de Pippin Barr, 24 mars 2018</a> · détail · <a href="https://creativecommons.org/licenses/by-nc/3.0/" target="_blank" rel="noopener">CC BY-NC 3.0</a></figcaption>
+      </figure>
+    </section>
+  </template>
+
+  <template id="mdm-barr-curseur">
+    <section class="etude">
+      <h2>Pippin Barr · Le déclic du curseur</h2>
+      <div>
+        <p>Dans <i>It is as if you were making love</i>, on fait des allers-retours avec une poignée. Comment sentir que le geste procure du plaisir à la machine ? Barr imagine d’abord que la poignée pourrait vibrer ou pulser.</p>
+        <p>Le 6 mai, il donne au prototype l’apparence de Windows 95. La poignée avance désormais par crans. Le choix de Windows lui suggère une autre façon d’exprimer le plaisir. Le logiciel pourrait afficher une barre de progression, comme pendant une installation. On suit la consigne et on voit la jauge se remplir.</p>
+        <p>Dans son commit du 6 juin, Barr note ce qui change pour la personne qui joue. Elle peut maintenant lire à l’écran ce qu’elle devait jusque-là deviner.</p>
+        <p class="sources"><a href="https://pippinbarr.com/itisasifyouweremakinglove/process/journal.html#2018-05-06-1839-sunday--windows-95" target="_blank" rel="noopener">Journal du 6 mai</a> · <a href="https://github.com/pippinbarr/itisasifyouweremakinglove/commit/cedebc40c5baf55b6badf9e41d350b491aaa388c" target="_blank" rel="noopener">Commit du 6 juin</a> · <a href="https://doi.org/10.1162/desi_a_00706" target="_blank" rel="noopener">Khaled et Barr, p. 67–68</a></p>
+      </div>
+      <figure>
+        <div class="versions-curseur">
+          <img src="../assets/images/mdm-curseur-lisse.png" alt="Une poignée ronde sur un rail vertical lisse, sans repères.">
+          <img src="../assets/images/mdm-curseur-jauge.png" alt="La poignée crantée dans une fenêtre Windows 95, avec une jauge bleue à moitié remplie.">
+        </div>
+        <figcaption>Deux versions du même geste. Détails des captures de <a href="https://pippinbarr.com/itisasifyouweremakinglove/process/journal.html#thursday-7-june-2018-655am" target="_blank" rel="noopener">Pippin Barr, 2018</a> · <a href="https://creativecommons.org/licenses/by-nc/3.0/" target="_blank" rel="noopener">CC BY-NC 3.0</a></figcaption>
+      </figure>
+    </section>
+  </template>
+
+  <template id="mdm-barr">
+    <section class="etude">
+      <h2>Ce que change un quart de tour</h2>
+      <div>
+        <p>Quand sa mère essaie le jeu, elle dit à Barr que le va-et-vient vertical lui donne l’impression de procurer du plaisir à un homme. Barr voulait laisser ouverte la question de savoir à qui l’on fait plaisir.</p>
+        <p>Il tourne le curseur à l’horizontale. Avant, on montait de 0 à 10. Maintenant, on part de 0 au centre et on glisse vers −5 ou +5. Le même aller-retour évoque moins directement une anatomie précise.</p>
+        <p>La capture montre le changement. Le journal du 15 juin permet de comprendre pourquoi Barr l’a essayé.</p>
+        <p class="sources"><a href="https://pippinbarr.com/itisasifyouweremakinglove/process/journal.html#friday-15-june-2018-717am" target="_blank" rel="noopener">Lire le journal du 15 juin</a> · <a href="https://pippinbarr.com/itisasifyouweremakinglove/" target="_blank" rel="noopener">Essayer le jeu</a></p>
+      </div>
+      <figure>
+        <img src="../assets/images/mdm-interface-barr.jpg" alt="Curseur horizontal gradué de −5 à +5, avec le zéro au centre. La consigne demande de le déplacer lentement entre 0 et 5.">
+        <figcaption><a href="https://pippinbarr.com/itisasifyouweremakinglove/press/" target="_blank" rel="noopener">Pippin Barr, 2018</a> · capture recadrée · <a href="https://creativecommons.org/licenses/by-nc/3.0/" target="_blank" rel="noopener">CC BY-NC 3.0</a></figcaption>
+      </figure>
+    </section>
+  </template>
+
+  <template id="mdm-atelier">
+    <section>
+      <h2>Documenter un essai dans dessin_souris</h2>
+
+      <p><strong>Exemple de commit — pendant le travail</strong><br>
+        Je viens de vérifier qu’un clic dépose un fragment et que glisser n’en dépose plus. Je fais un commit pour garder cette version.</p>
+      <p><strong>Titre</strong> — Déposer les fragments uniquement au clic<br>
+        <strong>Description</strong> — Je veux choisir les détails à garder et laisser du vide entre eux.</p>
+
+      <p><strong>Exemple de journal — à la fin de la séance de travail</strong><br>
+        « En glissant, je redessinais toute la silhouette. Avec quelques clics, je n’ai gardé que la tête et les chaussures. Je vois encore le corps entre les deux. Au prochain essai, je veux pouvoir écarter les morceaux pour voir à quel moment la silhouette disparaît. »</p>
+    </section>
+  </template>
+
+  <template id="atelier-intro">
+    <section>
+      <h2>Atelier · Introduction à p5.js</h2>
+      <ul>
+        <li>Exercice 1 — Introduction à p5.js</li>
+        <li>Exercice 2 — dessin_souris</li>
+      </ul>
+      <p>Retrouvez le ZIP des deux exercices et les tutoriels vidéo sur la <a href="cours-1.html">page du cours 1</a>.</p>
+    </section>
+  </template>
+
+  <template id="journal">
+    <section>
+      <h2>Fin de la séance · Journal de bord</h2>
+      <p>Reprenez deux versions de votre sketch. En les essayant, qu’avez-vous remarqué dans votre façon de vous servir de la souris ? Quel détail vous donne envie de poursuivre ?</p>
+      <p>Notez cette observation et votre prochaine piste en quelques lignes. Vous pouvez joindre une capture ou le lien du commit qui vous a donné l’idée.</p>
+      <p>Enregistrez votre entrée, faites un commit, puis un push.</p>
+    </section>
+  </template>
+</body>
+</html>
