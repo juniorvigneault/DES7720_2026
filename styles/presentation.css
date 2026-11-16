@@ -110,6 +110,12 @@ body.vue-cinq-seances {
   object-fit: contain;
 }
 
+#exemple blockquote {
+  margin: 15px 0 0;
+  max-width: 42ch;
+  font-size: 24px;
+}
+
 #exemple footer {
   margin-top: 8px;
   font-size: 14px;

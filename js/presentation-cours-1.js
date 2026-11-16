@@ -11,6 +11,8 @@ const diapositives = [
   { modele: "typographie", afficherSigle: true },
   { modele: "shake-and-scroll", afficherSigle: true },
   { modele: "do-not-touch", afficherSigle: true },
+  { modele: "prototyper-en-code" },
+  { modele: "intention-de-design" },
   { modele: "mdm" },
   { modele: "mdm-barr-curseur" },
   { modele: "mdm-barr" },
