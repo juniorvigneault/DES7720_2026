@@ -1,9 +1,41 @@
+
+let refletImage;
+
+function preload(){
+refletImage = loadImage("./assets/images/reflet.jpg")
+}
+
+
+
 function setup() {
+    createCanvas(refletImage.width * 2,refletImage.height);
+    background(0);
+         image(refletImage,0,0);
+
 }
 
 function draw() {
+     noFill();
+    stroke(255,0,0);
+    if (mouseMoved){
+
+    }
 }
 
+
+function mouseDragged(){
+    mousePressed();
+}
+
+function mousePressed(){
+    copy(refletImage,mouseX,mouseY,100,100,mouseX + refletImage.width,mouseY,100,100);
+}
+
+
+function mouseMoved(){
+        rect(mouseX,mouseY,100,100)
+
+}
 /*
 Pistes d’exploration — choisissez une idée ou suivez la vôtre.
 
