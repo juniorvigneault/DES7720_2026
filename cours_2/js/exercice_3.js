@@ -29,6 +29,10 @@ vitesse = map(distanceMouseEllipse, 0, width, 5, 0.001);
 
 
 
+// ellipsePosX = constrain(ellipsePosX, 100, width - 100)
+// ellipsePosY = constrain(ellipsePosY, 100, height - 100)
+
+
 if (mouseX > ellipsePosX) {
 ellipsePosX = ellipsePosX - vitesse;
 }
@@ -44,10 +48,27 @@ else if(mouseY < ellipsePosY) {
 ellipsePosY = ellipsePosY + vitesse;
 } 
 
+
+if (mouseIsPressed){
+
+    ellipsePosX = lerp(ellipsePosX, mouseX, 0.2);
+    ellipsePosY = lerp(ellipsePosY, mouseY, 0.2);
+
+    push();
+    fill(255,0,0)
+    rect(0,0,width,height);
+    pop();
+}
+
+push();
+noStroke();
 // ellipsePosY = ellipsePosY +1;
 ellipse(ellipsePosX,ellipsePosY,200);
+pop();
 }
 
 
 
-
+function mousePressed(){
+    console.log('CLICK !')
+}
