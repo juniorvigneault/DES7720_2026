@@ -18,18 +18,18 @@ function draw() {
 background(44, 56, 221);
 
 if (mouseX > ellipsePosX) {
-ellipsePosX = ellipsePosX +1;
+ellipsePosX = ellipsePosX -1;
 }
 else if(mouseX < ellipsePosX) {
-ellipsePosX = ellipsePosX - 1;
+ellipsePosX = ellipsePosX + 1;
 } 
 
 
 if (mouseY > ellipsePosY) {
-ellipsePosY = ellipsePosY +1;
+ellipsePosY = ellipsePosY -1;
 }
 else if(mouseY < ellipsePosY) {
-ellipsePosY = ellipsePosY - 1;
+ellipsePosY = ellipsePosY + 1;
 } 
 
 // ellipsePosY = ellipsePosY +1;
