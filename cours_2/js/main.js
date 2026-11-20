@@ -53,11 +53,11 @@ function dessinerMain() {
 
   if (distanceDoigts < 30 && !pince) {
     pince = true;
-    doigtPressed();
+    // doigtPressed();
   }
   else if (distanceDoigts > 45 && pince) {
     pince = false;
-    doigtReleased();
+    // doigtReleased();
   }
 
   push();
