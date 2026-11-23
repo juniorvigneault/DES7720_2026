@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Synthétiseur gestuel</title>
+  <style>
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: rgb(44, 56, 221); }
+    @font-face { font-family: Habitus; src: url("../fonts/Habitus-Regular.otf"); }
+    body { font-family: Habitus, sans-serif; }
+    canvas { display: block; }
+    #activation { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; padding: 20px; text-align: center; }
+    #activation[hidden] { display: none; }
+    button { border: 0; padding: 13px 21px; background: #fff; color: #151515; font: inherit; cursor: pointer; }
+    button:disabled { cursor: wait; opacity: .8; }
+    button:focus-visible { outline: 3px solid #ffed00; outline-offset: 4px; }
+    #message { margin: 0; color: #fff; font-size: 14px; }
+    #message:empty { display: none; }
+  </style>
+</head>
+<body>
+  <div id="activation">
+    <button id="demarrer" type="button" disabled>Activer la caméra et le son</button>
+    <p id="message" role="status" aria-live="polite"></p>
+  </div>
+  <script src="../js/p5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5.sound@0.4.2/dist/p5.sound.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ml5@1.4.0/dist/ml5.min.js"></script>
+  <script src="../js/sketch-synthe-main-suivi.js"></script>
+  <script src="../js/sketch-synthe-main.js"></script>
+</body>
+</html>

@@ -1,4 +1,3 @@
-const mots = ["Cours 1", ":", "Le", "code", "comme", "matière", "—", "16", "novembre"];
 const rallongeEntreMots = 0.5; // Pixels ajoutés à chaque lien. Augmenter pour que le titre pende plus bas.
 const hauteurAttachesTitre = 50; // En % de la hauteur du canevas.
 const tailleTexteBlocs = 20;

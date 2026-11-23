@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Friction et résistance — Cours 2</title>
+  <link rel="stylesheet" href="../styles/style.css">
+  <link rel="stylesheet" href="../styles/presentation.css">
+  <script src="../js/p5.min.js" defer></script>
+  <script src="../js/matter.min.js" defer></script>
+  <script src="../js/chaine-titre.js" defer></script>
+  <script src="../js/deroulement.js" defer></script>
+  <script src="../js/tissu-pause.js" defer></script>
+  <script src="../js/fin-atelier.js" defer></script>
+  <script src="../js/presentation-cours-2.js" defer></script>
+</head>
+<body>
+  <main>
+    <div id="canevas"><div id="exemple"></div></div>
+    <nav aria-label="Diapositives">
+      <button id="precedente" aria-label="Diapositive précédente" onclick="changerDiapo(-1)" disabled>←</button>
+      <button id="suivante" aria-label="Diapositive suivante" onclick="changerDiapo(1)">→</button>
+      <button type="button" aria-label="Réinitialiser la diapositive" title="Réinitialiser la diapositive" onclick="reinitialiserDiapo()">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 12.5a6.2 6.2 0 1 1-1.3-6.9l3 3M16.7 2.6v6h-6"/>
+        </svg>
+      </button>
+    </nav>
+  </main>
+
+  <template id="retour-exercices">
+    <section class="retour-exercices">
+      <h2>Retour sur l’exercice 2 — Dessin avec photo</h2>
+      <iframe class="sketch-dessin-photo" src="sketch-dessin-photo.html" title="Dessin avec photo : cliquez ou glissez sur la photo pour copier des fragments à droite"></iframe>
+      <ul>
+        <li>Comment avez-vous trouvé l’exercice et le code ?</li>
+        <li>Qu’est-ce qui vous a semblé difficile ou inspirant ?</li>
+        <li>Comment avez-vous trouvé l’expérimentation par le code ?</li>
+      </ul>
+    </section>
+  </template>
+
+  <template id="friction-intro">
+    <section>
+      <h2>Qu’est-ce que la friction en design ?</h2>
+      <p>La friction désigne une résistance dans l’interaction : un délai, un effort physique ou une situation qui demande d’ajuster sa manière d’agir.</p>
+      <p>Le design numérique cherche souvent à rendre les actions rapides et prévisibles. Avec <em>Designing Friction</em>, Luna Maurer et Roel Wouters proposent de donner une place à ce qui résiste : le corps, les émotions, l’incertitude et la relation aux autres.</p>
+      <p>Exemple possible : une interface exige que deux personnes coordonnent leurs gestes pour agir. L’effort de s’ajuster devient une partie de l’expérience : il peut susciter de l’attention, une négociation ou une rencontre.</p>
+      <footer>Luna Maurer et Roel Wouters, avec Alexandra Barancová · <a href="https://designingfriction.com/" target="_blank" rel="noopener">Designing Friction</a> · Exemple proposé pour la discussion.</footer>
+    </section>
+  </template>
+
+  <template id="performance">
+    <section>
+      <h2>Emoticons Don’t Have Wrinkles</h2>
+      <p>Filmée par un téléphone fixé devant son visage, Luna Maurer confronte l’expression standardisée de l’emoji à la complexité de ses émotions.</p>
+      <iframe src="https://player.vimeo.com/video/1073615086?autoplay=1&amp;muted=1&amp;playsinline=1" title="Emoticons Don’t Have Wrinkles — G10" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>
+      <footer>Luna Maurer — 2024 · Concept avec Roel Wouters · G10 · 20 min 25 · <a href="https://vimeo.com/1073615086" target="_blank" rel="noopener">Voir sur Vimeo</a></footer>
+    </section>
+  </template>
+
+  <template id="discussion-performance">
+    <section>
+      <h2>Discussion — La friction dans votre pratique</h2>
+      <ol>
+        <li>Dans un projet que vous avez conçu, quelle friction avez-vous cherché à supprimer ? Qu’avez-vous gagné ou perdu en rendant l’interaction plus fluide ?</li>
+        <li>La performance vous donne-t-elle envie de reconsidérer une décision de design ? Où l’attente, l’effort du corps ou l’imprévu pourraient-ils enrichir l’expérience ?</li>
+        <li>Pour qui cette friction aurait-elle du sens, et pour qui deviendrait-elle un obstacle ? Comment préserver le choix de participer ?</li>
+      </ol>
+    </section>
+  </template>
+
+  <template id="projet-as-slow-as-possible">
+    <section class="projet-friction">
+      <h2>2. Délai · As Slow As Possible</h2>
+      <img class="visuel-projet" src="../assets/images/as-slow-as-possible-pong.gif" alt="Pong au ralenti dans As Slow As Possible de Pippin Barr.">
+      <p>Pong, Breakout et Missile Command sont ralentis à l’extrême. L’attente entre les événements devient la matière du jeu et change notre attention au mouvement et au temps.</p>
+      <footer><a href="https://pippinbarr.com/as-slow-as-possible/info/" target="_blank" rel="noopener">Pippin Barr — 2026</a> · <a href="https://pippinbarr.com/as-slow-as-possible/index.html" target="_blank" rel="noopener">Jouer ↗</a></footer>
+    </section>
+  </template>
+
+  <template id="projet-artist-is-present">
+    <section class="projet-friction">
+      <h2>2. Délai · The Artist Is Present</h2>
+      <img class="visuel-projet" src="../assets/images/the-artist-is-present-queue.png" alt="Des visiteurs font la file dans le musée virtuel de The Artist Is Present.">
+      <p>Pour s’asseoir face à Marina Abramović, le joueur doit patienter dans une file en temps réel. Le délai exige de la patience et de l’attention : il faut avancer avec la file pour garder sa place.</p>
+      <footer><a href="https://pippinbarr.com/the-artist-is-present/info/" target="_blank" rel="noopener">Pippin Barr — 2011</a> · D’après la performance de Marina Abramović · <a href="https://pippinbarr.com/the-artist-is-present/" target="_blank" rel="noopener">Jouer ↗</a></footer>
+    </section>
+  </template>
+
+  <template id="principes-friction">
+    <section>
+      <h2>Cinq idées de départ</h2>
+      <ol>
+        <li>Inconfort — découvrir d’autres manières d’agir.</li>
+        <li>Délai — laisser place à l’attente et au désir.</li>
+        <li>Engagement du corps — mobiliser les sens et la présence physique.</li>
+        <li>Non-positif — accueillir le doute, la complexité et la différence.</li>
+        <li>Imprévisibilité — sortir des comportements habituels.</li>
+      </ol>
+      <p>Les projets suivants proposent une lecture de ces principes. Une œuvre peut en traverser plusieurs.</p>
+      <footer>Luna Maurer · <a href="https://vimeo.com/1073615086#t=10m47s" target="_blank" rel="noopener">Emoticons Don’t Have Wrinkles, à partir de 10:47</a></footer>
+    </section>
+  </template>
+
+  <template id="projet-eyecam">
+    <section class="projet-friction">
+      <h2>1. Inconfort · Eyecam</h2>
+      <iframe src="https://www.youtube.com/embed/JMxr8Nq-w_w?autoplay=1&amp;mute=1&amp;playsinline=1" title="Eyecam — Démonstration de Marc Teyssier" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe>
+      <p>Une webcam en forme d’œil humain cligne, regarde autour d’elle et réagit à notre présence. Son apparence rend la surveillance tangible et peut provoquer un malaise face à l’appareil qui nous observe.</p>
+      <footer><a href="https://marcteyssier.com/projects/eyecam/" target="_blank" rel="noopener">Marc Teyssier — 2021</a> · <a href="https://www.youtube.com/watch?v=JMxr8Nq-w_w" target="_blank" rel="noopener">Démonstration · 2 min 12</a></footer>
+    </section>
+  </template>
+
+  <template id="projet-tourmente">
+    <section class="projet-friction">
+      <h2>1. Inconfort · Tourmente</h2>
+      <iframe src="https://www.youtube.com/embed/d6rGT-ArAdw?autoplay=1&amp;mute=1&amp;playsinline=1&amp;start=32&amp;end=164" title="Tourmente — Interaction au Grand Théâtre de Québec" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>
+      <p>Le souffle dans le micro du téléphone fait varier le vent qui frappe un visage filmé. Le plaisir de contrôler l’image se mêle à l’inconfort de voir ce visage malmené.</p>
+      <footer><a href="https://www.jeandubois.info/blog/project/tourmente/" target="_blank" rel="noopener">Jean Dubois — 2015</a> · Grand Théâtre de Québec · <a href="https://www.youtube.com/watch?v=d6rGT-ArAdw&amp;t=32s" target="_blank" rel="noopener">Voir l’interaction ↗</a></footer>
+    </section>
+  </template>
+
+  <template id="projet-heart-from-space">
+    <section class="projet-friction">
+      <h2>3. Engagement du corps · A Heart from Space</h2>
+      <iframe src="https://player.vimeo.com/video/501792498?autoplay=1&amp;muted=1&amp;playsinline=1" title="A Heart from Space — Jonathan Chomko" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>
+      <p>Les participants se déplacent pour former ensemble un cœur à partir de leurs positions GPS. Leurs corps dessinent l’image : chacun doit ajuster sa position aux mouvements des autres.</p>
+      <footer><a href="https://jonathanchomko.com/A-Heart-from-Space" target="_blank" rel="noopener">Jonathan Chomko — 2020</a> · <a href="https://vimeo.com/501792498" target="_blank" rel="noopener">Voir la vidéo ↗</a></footer>
+    </section>
+  </template>
+
+  <template id="projet-tear-gun">
+    <section class="projet-friction">
+      <h2>4. Non-positif · Tear Gun</h2>
+      <img class="visuel-projet" src="../assets/images/tear-gun.jpg" alt="Le dispositif Tear Gun et son système de collecte des larmes.">
+      <p>Ce dispositif recueille les larmes, les congèle et les projette. Il transforme la vulnérabilité en moyen d’expression et donne une place à une émotion difficile dans l’interaction.</p>
+      <footer><a href="https://yifeichen.webflow.io/" target="_blank" rel="noopener">Yi Fei Chen — 2016</a> · Image : Fei Studio</footer>
+    </section>
+  </template>
+
+  <template id="projet-say-one-more-thing">
+    <section class="projet-friction">
+      <h2>4. Non-positif · Say One More Thing</h2>
+      <img class="visuel-projet" src="../assets/images/say-one-more-thing.png" alt="Le formulaire rose de Say One More Thing annonce une chance sur un million que le message soit envoyé.">
+      <p>On écrit à quelqu’un, mais le message n’a qu’une chance sur un million d’être envoyé. Cette communication incertaine met en jeu le désir d’être entendu, le doute et la vulnérabilité.</p>
+      <footer><a href="https://tina.zone/boringversion.html" target="_blank" rel="noopener">Tina Tarighian — 2024</a> · <a href="https://say-one-more-thing.com/" target="_blank" rel="noopener">Voir le projet ↗</a></footer>
+    </section>
+  </template>
+
+  <template id="projet-do-not-draw">
+    <section class="projet-friction">
+      <h2>5. Imprévisibilité · Do Not Draw a Penis</h2>
+      <img class="visuel-projet" src="../assets/images/do-not-draw-a-penis.png" alt="L’interface de dessin de Do Not Draw a Penis commente un téléphone dessiné à la main.">
+      <p>On dessine librement, mais un système de reconnaissance commente et censure certaines formes. L’interdit invite à tester ses limites et à inventer des façons de contourner la règle : l’imprévisibilité vient des manières de jouer avec le système.</p>
+      <footer><a href="https://archiv.hkw.de/en/programm/projekte/2019/repeat_after_me/do_not_draw_a_penis.php" target="_blank" rel="noopener">Moniker — Luna Maurer et Roel Wouters — 2019</a> · <a href="https://donotdrawapenis.com/" target="_blank" rel="noopener">Essayer ↗</a></footer>
+    </section>
+  </template>
+
+  <template id="projet-piano-stairs">
+    <section class="projet-friction">
+      <h2>5. Imprévisibilité · Piano Stairs</h2>
+      <iframe src="https://www.youtube.com/embed/2lXh2n0aPyw?autoplay=1&amp;mute=1&amp;playsinline=1" title="Piano Stairs — The Fun Theory" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe>
+      <p>Les marches d’un escalier de métro produisent des notes de piano. Un trajet quotidien devient une occasion de s’arrêter, d’improviser et de jouer : l’imprévisibilité tient aux manières de s’approprier le lieu.</p>
+      <footer>DDB pour Volkswagen — 2009 · The Fun Theory · <a href="https://www.youtube.com/watch?v=2lXh2n0aPyw" target="_blank" rel="noopener">Voir la vidéo ↗</a></footer>
+    </section>
+  </template>
+
+  <template id="projet-final">
+    <section>
+      <h2>Projet final — Prototype d’expérience interactive numérique</h2>
+      <p>À partir de vos expérimentations en code créatif, concevez une interaction qui explore une forme de friction. Situez-la dans un contexte d’usage ou une situation imaginée.</p>
+      <p><strong>Les quatre composantes du projet</strong></p>
+      <ol>
+        <li>Un prototype numérique que l’on peut essayer.</li>
+        <li>Une représentation libre de l’expérience dans son contexte.</li>
+        <li>Au moins un test avec observations et discussion.</li>
+        <li>Une documentation du processus : journal et commits.</li>
+      </ol>
+    </section>
+  </template>
+
+  <template id="technologies">
+    <section>
+      <h2>1. Le prototype — Une interaction à essayer</h2>
+      <ul>
+        <li>Définissez une entrée : souris, clavier, toucher, caméra, son…</li>
+        <li>Élaborez la réponse du système et choisissez une piste de friction parmi les cinq principes.</li>
+        <li>Poursuivez un exercice ou commencez un nouveau sketch en p5.js. Une autre technologie est possible selon votre projet.</li>
+        <li>Donnez au projet un titre, une courte description et les indications pour l’essayer.</li>
+      </ul>
+      <p>Il reste quatre cours : concentrez-vous sur une interaction fonctionnelle. Votre intention peut évoluer au fil des essais.</p>
+      <p><strong>À remettre :</strong> le prototype sur GitHub Pages et son code dans le dépôt.</p>
+    </section>
+  </template>
+
+  <template id="carte-ux">
+    <section>
+      <h2>2. Cartographie de l’expérience — Une forme libre</h2>
+      <p>Situez votre prototype dans un contexte réel ou imaginé. Représentez ce qui se passe et ce que l’expérience pourrait faire ressentir.</p>
+      <ul>
+        <li><strong>Le contexte :</strong> qui participe, où et dans quelle situation ?</li>
+        <li><strong>L’interaction :</strong> que fait la personne et comment le système répond-il ?</li>
+        <li><strong>L’expérience :</strong> quel rythme, quelle ambiance, quelles sensations ou tensions recherchez-vous ? Où intervient la friction ?</li>
+      </ul>
+      <p><strong>La forme est libre :</strong> vidéo, collage, dessin, storyboard, carte sonore, cartographie UX classique ou combinaison de médias. Choisissez une forme expressive qui aide à comprendre votre projet.</p>
+      <p><strong>À remettre :</strong> cette représentation dans votre dépôt, avec les indications nécessaires pour la comprendre.</p>
+    </section>
+  </template>
+
+  <template id="carte-collage">
+    <section class="exemple-carte">
+      <h2>Collage · Exposeia</h2>
+      <img class="visuel-projet" src="../assets/images/cartographie-exposeia.jpg" alt="Collage associant une sonde dans le sol, un pavillon sonore et des téléphones dont la couleur et le volume varient selon une échelle de position.">
+      <p>Ce projet spéculatif propose de rendre la contamination du sol perceptible par des sons sur les téléphones. Le collage relie le sol, un dispositif imaginé et les retours sonores et visuels : il rend le principe et son contexte matériel lisibles.</p>
+      <footer><a href="https://speculativeedu.eu/case-study-from-a-to-b-hands-on-speculative-design/" target="_blank" rel="noopener">Adi Frug et Adi Gilad — 2020</a> · <a href="https://speculativeedu.eu/wp-content/uploads/2020/07/Exposeia_proposal_Frug___Gilad.jpg" target="_blank" rel="noopener">Voir en grand ↗</a></footer>
+    </section>
+  </template>
+
+  <template id="carte-sensible">
+    <section class="exemple-carte">
+      <h2>Storyboard · The Planet Bang</h2>
+      <img class="visuel-projet" src="../assets/images/cartographie-planet-bang.png" alt="Neuf dessins situent un jeu de planètes virtuelles sur une place publique, avec les gestes des participants, les projections et les réactions des passants.">
+      <p>Ce storyboard imagine un jeu de planètes virtuelles sur une place publique. Il relie les gestes des participants, les réponses du dispositif et les réactions des passants pour montrer comment l’interaction prend place dans la vie du lieu.</p>
+      <footer><a href="https://ranwuwu.com/pages/the_planet_bang/the_planet_bang.html" target="_blank" rel="noopener">Wuwu Ran et équipe — DigitalFutures, 2023</a> · <a href="https://ranwuwu.com/assets/digital/The_Planet_Bang/storyboard.png" target="_blank" rel="noopener">Voir en grand ↗</a></footer>
+    </section>
+  </template>
+
+  <template id="carte-face-machine">
+    <section class="exemple-carte">
+      <h2>Collage vidéo · Face Machine</h2>
+      <iframe src="https://www.youtube.com/embed/lIee1CQM4x4?autoplay=1&amp;mute=1&amp;playsinline=1" title="Video Prototype — Face Machine V2 — Junior Vigneault" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe>
+      <p>Un exemple de collage vidéo pour situer un prototype et donner à voir l’expérience envisagée. Le montage permet de relier le dispositif, l’interaction et son contexte.</p>
+      <footer>Junior Vigneault · Face Machine V2 · <a href="https://youtu.be/lIee1CQM4x4" target="_blank" rel="noopener">Voir la vidéo ↗</a></footer>
+    </section>
+  </template>
+
+  <template id="test-observation">
+    <section>
+      <h2>3. Le test — Observations et discussion</h2>
+      <p><strong>Faites essayer le prototype à au moins une personne.</strong></p>
+      <ol>
+        <li>Situez l’expérience, puis laissez la personne explorer le prototype.</li>
+        <li>Observez ses gestes, ses hésitations, ses initiatives et ses réactions.</li>
+        <li>Discutez ensuite de ce qu’elle a vécu, ressenti et compris.</li>
+        <li>Notez ce que ces retours vous donnent envie de modifier, de conserver ou d’explorer.</li>
+      </ol>
+      <p><strong>À documenter dans le journal :</strong> vos observations, les retours de la personne et votre réflexion après le test. Distinguez ces trois éléments.</p>
+    </section>
+  </template>
+
+  <template id="journal-commits">
+    <section>
+      <h2>4. La documentation — Journal et commits</h2>
+      <ul>
+        <li><strong>Pendant le travail :</strong> faites un commit aux étapes significatives. Nommez le changement et expliquez ce qui motive votre décision.</li>
+        <li><strong>En fin de séance :</strong> notez vos essais, observations, idées et références dans le journal. Reliez-les à l’évolution de votre intention.</li>
+        <li><strong>À la fin du projet :</strong> revenez sur les choix qui ont compté, les pistes abandonnées, ce que vous avez compris et ce que vous aimeriez poursuivre.</li>
+      </ul>
+      <p>Ajoutez les captures, dessins, liens ou autres traces utiles pour comprendre votre démarche depuis le début de l’atelier.</p>
+      <p><strong>À remettre :</strong> le journal, les traces du processus et l’historique des commits dans votre dépôt GitHub.</p>
+    </section>
+  </template>
+
+  <template id="remise">
+    <section>
+      <h2>Présentation et remise — Dates et liens</h2>
+      <p><strong>14 décembre · Présentation en classe</strong><br>Présentez le prototype et son contexte pendant la seconde moitié du cours.</p>
+      <p><strong>21 décembre · Documentation finale</strong><br>Rassemblez dans votre dépôt le code, la cartographie, le journal, les retours du test et les traces du développement.</p>
+      <p><strong>Envoyez par courriel les deux liens :</strong></p>
+      <ol>
+        <li>Votre dépôt GitHub avec la documentation.</li>
+        <li>Votre prototype accessible sur GitHub Pages.</li>
+      </ol>
+    </section>
+  </template>
+
+  <template id="retour-synthe">
+    <section class="retour-exercices">
+      <h2>Retour sur l’exercice — Le synthé main</h2>
+      <iframe class="sketch-synthe-main" src="sketch-synthe-main.html" title="Synthé main : contrôler le cercle et le son avec une pince pouce-index" allow="camera; autoplay"></iframe>
+      <ul>
+        <li>Comment avez-vous trouvé le geste, l’image et le son ensemble ?</li>
+        <li>Qu’est-ce qui vous donnait du contrôle, ou vous faisait hésiter ?</li>
+        <li>Qu’aimeriez-vous changer ? Qu’est-ce qui reste flou dans le code ?</li>
+      </ul>
+    </section>
+  </template>
+
+  <template id="retour-code">
+    <section>
+      <h2>Retour dans le code</h2>
+      <p>Ouvrons le sketch ensemble pour comprendre ce qui se passe entre la détection de la main, les conditions, le mouvement du cercle et le son.</p>
+    </section>
+  </template>
+
+  <template id="atelier-friction">
+    <section>
+      <h2>Atelier — Explorer à partir du synthé</h2>
+      <p><strong>Si le tutoriel n’est pas terminé :</strong> regardez <a href="https://youtu.be/1tLfGtSMtj0" target="_blank" rel="noopener">la vidéo du cours 2</a> et réalisez le sketch en classe. Demandez de l’aide au besoin.</p>
+      <p><strong>Si votre sketch fonctionne, choisissez une piste à explorer :</strong></p>
+      <ul>
+        <li>Modifier des paramètres : vitesse, taille, couleurs ou son.</li>
+        <li>Relier la détection de la main au sketch de dessin : contrôler le dessin avec la main plutôt que le cercle.</li>
+        <li>Imaginer dans quel contexte cette interaction pourrait se retrouver et quel principe de friction pourrait y être exploré.</li>
+      </ul>
+      <p>Notez ce qui vous intéresse dans vos essais et gardez une version avec un commit. Je suis disponible pour vous aider à modifier le code.</p>
+    </section>
+  </template>
+
+  <template id="journal">
+    <section>
+      <h2>Fin de séance — Journal et push</h2>
+      <ol>
+        <li>Notez la modification essayée et ce que vous avez observé en interagissant. Y voyez-vous un lien avec un des principes de friction ?</li>
+        <li>Gardez les idées, les questions et les références qui vous intéressent pour le projet final.</li>
+        <li>Ajoutez une capture ou un lien de commit utile, puis faites un commit et un push.</li>
+      </ol>
+    </section>
+  </template>
+  <template id="ressources-fin">
+    <section>
+      <h2>Quelques ressources à explorer</h2>
+      <ul>
+        <li><a href="https://nahuelgerth.de/work" target="_blank" rel="noopener">Nahuel Gerth</a> — Projets de design graphique et de code créatif.</li>
+        <li><a href="https://simplysuvi.medium.com/bringing-vision-to-reality-an-exploration-of-eye-tracking-with-tensorflow-js-and-web-2c574ab9cf0f" target="_blank" rel="noopener">Suivi du regard avec TensorFlow.js et le web</a> — Une exploration de l’œil comme entrée d’interaction.</li>
+        <li><a href="https://paperjs.org/" target="_blank" rel="noopener">Paper.js</a> — Une bibliothèque JavaScript pour le dessin vectoriel.</li>
+      </ul>
+    </section>
+  </template>
+</body>
+</html>

@@ -1,3 +1,23 @@
+const dateCours = "16 novembre";
+const dateProchainCours = "23 novembre";
+const mots = ["Cours 1", ":", "Le", "code", "comme", "matière", "—", "16", "novembre"];
+
+const etapes = [
+  "Retour sur le cours et objectifs de l’atelier",
+  "Plan de cours et évaluations",
+  "Le code comme matière : théorie et processus",
+  "Initiation à p5.js",
+  "Expérimentations",
+  "Journal de bord",
+  "À préparer pour la semaine prochaine"
+].map((etape, i) => `${i + 1}. ${etape}`);
+
+const consignesFin = [
+  "Terminez votre variation de dessin_souris, faites un commit et écrivez dans votre journal. Nous regarderons les sketchs en début de cours.",
+  "Faites un push, puis envoyez-moi par courriel les liens de votre dépôt GitHub et de votre site GitHub Pages.",
+  "Consultez les vidéos du cours 2 à partir du mercredi 18 novembre."
+];
+
 const diapositives = [
   { dessiner: accueil, afficherSigle: true },
   { dessiner: deroulement, afficherSigle: true },

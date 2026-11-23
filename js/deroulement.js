@@ -1,13 +1,3 @@
-const etapes = [
-  "Retour sur le cours et objectifs de l’atelier",
-  "Plan de cours et évaluations",
-  "Le code comme matière : théorie et processus",
-  "Initiation à p5.js",
-  "Expérimentations",
-  "Journal de bord",
-  "À préparer pour la semaine prochaine"
-].map((etape, i) => `${i + 1}. ${etape}`);
-
 let hauteurEtape;
 
 function creerPile() {
@@ -32,7 +22,7 @@ function creerPile() {
 }
 
 function deroulement() {
-  titreDiapo("Déroulement du cours — 16 novembre");
+  titreDiapo("Déroulement du cours — " + dateCours);
   for (const bloc of scenesPhysiques[1].bodies) {
     dessinerBloc(bloc, tailleMot, hauteurEtape);
   }

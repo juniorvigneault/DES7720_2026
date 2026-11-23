@@ -39,7 +39,7 @@ for (const element of document.querySelectorAll("h1, h2, h3, p, li, a, .copier-c
 
 // Pour choisir une image, ajouter data-image="assets/images/photo.jpg" au lien.
 const racineDuSite = new URL("../", document.currentScript.src);
-for (const lien of document.querySelectorAll("main a[href]")) {
+for (const lien of document.querySelectorAll("main:not(.liens-github) a[href]")) {
   const apercu = document.createElement("figure");
   apercu.className = "image-survol";
   apercu.hidden = true;

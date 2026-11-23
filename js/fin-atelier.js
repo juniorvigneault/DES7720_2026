@@ -2,11 +2,6 @@ let policeBilles;
 const sceneBye = Matter.Composite.create();
 let lignesFin = [];
 let diametreBilleFin = 10;
-const consignesFin = [
-  "Terminez votre variation de dessin_souris, faites un commit et écrivez dans votre journal. Nous regarderons les sketchs en début de cours.",
-  "Faites un push, puis envoyez-moi par courriel les liens de votre dépôt GitHub et de votre site GitHub Pages.",
-  "Consultez les vidéos du cours 2 à partir du mercredi 18 novembre."
-];
 
 function preparerBye() {
   mouseReleased();
@@ -63,7 +58,7 @@ function disposerFin(debut, interligne, diametre) {
 }
 
 function finAtelier() {
-  const y = titreDiapo("Pour le 23 novembre");
+  const y = titreDiapo("Pour le " + dateProchainCours);
   const taille = min(17.33, width / 21, (height - extraTitleSpace) / 18);
   const interligne = round(taille * 1.27);
   const diametre = 10 * min(1, width / 540, height / 420);
